@@ -93,7 +93,7 @@ export class ComponentToPrintKwitansi extends React.Component {
                 <table style={{ width: '100%', marginBottom: 10 }}>
                     <tbody>
                         <tr>
-                            <td style={{ fontSize: 16, color: 'black' }}>Rincian biaya perjalanan dinas</td>
+                            <td style={{ fontSize: 16, color: 'black' }}>RINCIAN ANGGARAN PERJALANAN DINAS</td>
                         </tr>
                     </tbody>
                 </table>
@@ -102,7 +102,7 @@ export class ComponentToPrintKwitansi extends React.Component {
                         <tr>
                             <td>Nomor Surat</td>
                             <td>:</td>
-                            <td>{listSppd.nomor_surat}/{listSppd.format_surat}</td>
+                            <td>{listSppd.nomor_surat_tugas}/{listSppd.format_surat_tugas}</td>
                         </tr>
                         <tr>
                             <td>Tanggal</td>
@@ -153,6 +153,45 @@ export class ComponentToPrintKwitansi extends React.Component {
                         </tr>
                     </tbody>
                 </table>
+
+                <hr />
+
+                {/* <table style={{ width: '100%', marginBottom: 10, textAlign: 'center' }}>
+                    <tbody>
+                        <tr>
+                            <td style={{ fontSize: 16, color: 'black' }}>KUITANSI</td>
+                        </tr>
+                        <tr>
+                            <td style={{ fontSize: 14, color: 'black' }}><b>Nomor</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table >
+                    <tbody style={{ width: '100%' }}>
+                        <tr style={{ width: '100%'}}>
+                            <td style={{ padding: 10 }}>Telah Terima Dari</td>
+                            <td style={{ padding: 10 }}>:</td>
+                            <td style={{ textAlign: 'right', padding: 10 }}>  </td>
+                        </tr>
+                        <tr style={{ width: '100%'}}>
+                            <td style={{ padding: 10 }}>Uang Sejumlah</td>
+                            <td style={{ padding: 10 }}>:</td>
+                            <td style={{ textAlign: 'right', padding: 10 }}> {terbilang(total)} rupiah</td>
+                        </tr>
+                        <tr style={{ width: '100%'}}>
+                            <td style={{ padding: 10 }}>Untuk Pembayaran</td>
+                            <td style={{ padding: 10 }}>:</td>
+                            <td style={{ textAlign: 'right', padding: 10 }}>  </td>
+                        </tr>
+                        <tr>
+                            <td colSpan='3' style={{ border: '1px solid black', textAlign: 'center', padding: 10, fontStyle: 'italic', fontWeight: 'bold' }}>Total</td>
+                            <td style={{ border: '1px solid black', textAlign: 'right', padding: 10, fontWeight: 'bold' }}> <NumberFormat thousandSeparator={true} displayType={'text'} value={total} /></td>
+                        </tr>
+                        <tr>
+                            <td colSpan='5' style={{ border: '1px solid black', textAlign: 'center', padding: 10, fontStyle: 'italic', fontWeight: 'bold' }}>{terbilang(total)} rupiah</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <table style={{ width: '100%' }}>
                     <tr >
                         <td style={{ width: '50%', padding: 20 }}>
@@ -187,7 +226,7 @@ export class ComponentToPrintKwitansi extends React.Component {
                             <b>NIP. {listPegawai.nip}</b>
                         </td>
                     </tr>
-                </table>
+                </table> */}
             </table>
         );
     }

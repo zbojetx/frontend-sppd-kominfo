@@ -381,11 +381,12 @@ function Pelayanan() {
 
     return (
         <Content
-            className="site-layout-background"
+            // className="site-layout-background"
             style={{
                 margin: '24px 16px',
                 padding: 24,
-                minHeight: 280,
+                minHeight: '100%',
+                
             }}
         >
 
@@ -393,8 +394,8 @@ function Pelayanan() {
                 title="Pegawai"
                 //extra={<Button type="dashed" onClick={() => browserHistory.push('/addpegawai')}>Tambah Pegawai </Button>}
                 extra={<Button type="dashed" onClick={createnew}>Tambah Pegawai </Button>}
-                style={{ width: '100%', borderWidth: 0 }}
-                headStyle={{ color: 'white', backgroundColor: '#0984e3', fontWeight: 'bold', fontSize: 20 }}
+                style={{ width: '100%', borderWidth: 0, marginBottom: 20 }}
+                headStyle={{ color: 'white', backgroundColor: '#0984e3', fontWeight: 'bold', fontSize: 20,  }}
             />
 
             <Table columns={columns} dataSource={listPegawai} />

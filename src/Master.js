@@ -100,14 +100,14 @@ export default function Master(props) {
                                 title={
                                     <span>
                                         <SnippetsTwoTone twoToneColor="#f0932b" />
-                                        <span>Surat Tugas & SPPD</span>
+                                        <span>Surat Tugas & Kuitansi</span>
                                     </span>
                                 }>
                                 <Menu.Item key="7" onClick={() => browserHistory.push('/surattugas')}>
                                     <span>Surat Tugas</span>
                                 </Menu.Item>
                                 <Menu.Item key="8" onClick={() => browserHistory.push('/sppd')}>
-                                    <span>SPPD</span>
+                                    <span>Kuitansi</span>
                                 </Menu.Item>
                             </SubMenu>
                             <SubMenu key="appd"

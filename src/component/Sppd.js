@@ -648,27 +648,33 @@ function Sppd() {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    {record.nomor_surat_tugas}/{record.format_surat_tugas}
+                    {record.nomor_surat_tugas}{record.format_surat_tugas}
                 </span>
             ),
         },
         {
-            title: 'Nomor SPD',
+            title: 'Kwintansi',
             key: 'action',
             render: (text, record) => (
                 <span>
-                    {record.nomor_surat}/{record.format_surat}
+                    <Button key="input" onClick={() => browserHistory.push({ pathname: '/rincian', state: { id: record.id, no_surat: text.nomor_surat } })} style={{ marginLeft: 10 }} type="primary" icon={<DollarCircleOutlined />} >Input Anggaran</Button>
                 </span>
             ),
         },
         {
-            title: 'Action',
+            title: 'Print',
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <Button key="edit" onClick={() => getSppdById(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<EditOutlined />} ></Button>
-                    <Button key="edit" onClick={() => modalTriggerPengikut(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<UserAddOutlined />} ></Button>
-                    <Button key="input" onClick={() => browserHistory.push({ pathname: '/rincian', state: { id: record.id, no_surat: text.nomor_surat } })} style={{ marginLeft: 10 }} type="primary" icon={<DollarCircleOutlined />} ></Button>
+                    <Button key="input" onClick={() => modalTriggerPrintKwitansi(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Kuitansi</Button>
+                </span>
+            ),
+        },
+        {
+            title: '#',
+            key: 'action',
+            render: (text, record) => (
+                <span>
                     <Popconfirm
                         title="Anda yakin menghapus Data ini?"
                         onConfirm={() => removesppd(record.id)}
@@ -678,16 +684,6 @@ function Sppd() {
                     >
                         <Button key="hapus" style={{ marginLeft: 10 }} type="danger" icon={<DeleteOutlined />} ></Button>
                     </Popconfirm>
-                </span>
-            ),
-        },
-        {
-            title: 'Print',
-            key: 'action',
-            render: (text, record) => (
-                <span>
-                    <Button key="edit" onClick={() => modalTriggerPrintSppd(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >SPPD</Button>
-                    <Button key="input" onClick={() => modalTriggerPrintKwitansi(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Kwitansi</Button>
                 </span>
             ),
         },
@@ -771,9 +767,9 @@ function Sppd() {
         >
 
             <Card
-                title="Surat Perintah Perjalanan Dinas (SPPD)"
+                title="Kwitansi"
                 //extra={<Button type="dashed" onClick={() => browserHistory.push('/addpegawai')}>Tambah Pegawai </Button>}
-                extra={<Row><Col style={{ paddingRight: 10 }}><Button type="dashed" onClick={createnew}>Buat SPPD </Button></Col><Col> <Button type="dashed" onClick={modalExportTrigger}>Export to excel</Button></Col></Row>}
+                extra={<Row><Col> <Button type="dashed" onClick={modalExportTrigger}>Export to excel</Button></Col></Row>}
                 style={{ width: '100%', marginBottom: 20  }}
                 headStyle={{ color: 'white', backgroundColor: '#0984e3', fontWeight: 'bold', fontSize: 20 }}
             >

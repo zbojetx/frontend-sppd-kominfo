@@ -17,7 +17,8 @@ import { Link, browserHistory } from 'react-router';
 import { isLogin } from '../reducer/LocalStoradge';
 import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
-import { ComponentToPrint } from './print/Printst'
+import { ComponentToPrint } from './print/Printst';
+import { ComponentToPrint2 } from './print/Printstwk';
 import { ComponentToPrintKwitansi } from './print/Printkwintansi';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -106,6 +107,7 @@ function Sppd() {
     const [modal, setModal] = useState(false)
     const [modalExport, setModalExport] = useState(false)
     const [modalPrintSt, setModalPrintSt] = useState(false)
+    const [modalPrintStWako, setModalPrintStWako] = useState(false)
     const [modalPrintKwitansi, setModalPrintKwitansi] = useState(false)
     const [modalPelaksana, setModalPelaksana] = useState(false)
     const [listSuratTugas, setListSuratTugas] = useState([])
@@ -221,6 +223,11 @@ function Sppd() {
     const modalTriggerPrintSt = async (id) => {
         await setId(id)
         setModalPrintSt(!modalPrintSt)
+    }
+
+    const modalTriggerPrintStWako = async (id) => {
+        await setId(id)
+        setModalPrintStWako(!modalPrintStWako)
     }
 
     const getsurattugas = async () => {
@@ -570,7 +577,7 @@ function Sppd() {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    {record.nomor_surat}/{record.format_nomor}
+                    {record.nomor_surat}{record.format_nomor}
                 </span>
             ),
         },
@@ -616,8 +623,9 @@ function Sppd() {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <Button key="edit" onClick={() => generateSppd(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Generate SPPD</Button>
+                    <Button key="edit" onClick={() => modalTriggerPrintStWako(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Surat Tugas Wako</Button>
                     <Button key="edit" onClick={() => modalTriggerPrintSt(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Surat Tugas</Button>
+                    <Button key="edit" onClick={() => generateSppd(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Generate Kuitansi</Button>
                 </span>
             ),
         },
@@ -782,7 +790,7 @@ function Sppd() {
                     </Row>
                 </InputBoxCenter>
                 <InputBoxCenter>
-                    <Label>Menimbang</Label>
+                    <Label>Dasar Pada Surat Wako</Label>
                     <ReactQuill
                         theme={theme}
                         onChange={onChangeMenimbang}
@@ -902,6 +910,27 @@ function Sppd() {
                 width={1000}
             >
                 <ComponentToPrint
+                    key={id}
+                    ref={componentRef}
+                    dataToPrint={id}
+                />
+                <ReactToPrint
+                    trigger={() => <Button block type="primary" icon={<PrinterOutlined />}>Print</Button>}
+                    content={() => componentRef.current}
+                />
+
+            </Modal>
+
+            <Modal
+                title="Print Surat Walikota"
+                centered
+                visible={modalPrintStWako}
+                //onOk={createorupdate}
+                onCancel={modalTriggerPrintStWako}
+                footer={null}
+                width={1000}
+            >
+                <ComponentToPrint2
                     key={id}
                     ref={componentRef}
                     dataToPrint={id}
