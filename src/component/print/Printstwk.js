@@ -177,8 +177,8 @@ export class ComponentToPrint2 extends React.Component {
 
                     <table style={{ width: '100%', fontSize: 12,  color: 'black ' }}>
                         <tr>
-                            <td style={{ width: '70%' }}></td>
-                            <td style={{ width: '10%' }}>Dikeluarkan di</td>
+                            <td style={{ width: '65%' }}></td>
+                            <td style={{ width: '15%' }}>Dikeluarkan di</td>
                             <td>:</td>
                             <td>{instansi.kota}</td>
                         </tr>

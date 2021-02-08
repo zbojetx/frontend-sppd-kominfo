@@ -19,6 +19,7 @@ import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
 import { ComponentToPrint } from './print/Printsppd'
 import { ComponentToPrintKwitansi } from './print/Printkwintansi'
+import { ComponentToPrintKwitansiBendahara } from './print/PrintKwBendahara'
 import ReactQuill, { Quill } from 'react-quill';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import moment from 'moment';
@@ -105,6 +106,7 @@ function Sppd() {
     const [modalExport, setModalExport] = useState(false)
     const [modalPrintSppd, setModalPrintSppd] = useState(false)
     const [modalPrintKwitansi, setModalPrintKwitansi] = useState(false)
+    const [modalPrintKwitansiBendahara, setModalPrintKwitansiBendahara] = useState(false)
     const [modalPengikut, setModalPengikut] = useState(false)
     const [listSppd, setListSppd] = useState([])
     const [listPegawai, setListPegawai] = useState([])
@@ -242,6 +244,11 @@ function Sppd() {
     const modalTriggerPrintKwitansi = async (id) => {
         await setId(id)
         setModalPrintKwitansi(!modalPrintKwitansi)
+    }
+
+    const modalTriggerPrintKwitansiBendahara = async (id) => {
+        await setId(id)
+        setModalPrintKwitansiBendahara(!modalPrintKwitansiBendahara)
     }
 
     const getsppd = async () => {
@@ -665,9 +672,14 @@ function Sppd() {
             title: 'Print',
             key: 'action',
             render: (text, record) => (
-                <span>
-                    <Button key="input" onClick={() => modalTriggerPrintKwitansi(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Kuitansi</Button>
-                </span>
+                <Row>
+                    <Col>
+                        <Button key="input" onClick={() => modalTriggerPrintKwitansi(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Rincian</Button>
+                    </Col>
+                    <Col>
+                        <Button key="input" onClick={() => modalTriggerPrintKwitansiBendahara(record.id)} style={{ marginLeft: 10 }} type="primary" icon={<PrinterOutlined />} >Kuitansi</Button>
+                    </Col>
+                </Row>
             ),
         },
         {
@@ -767,10 +779,10 @@ function Sppd() {
         >
 
             <Card
-                title="Kwitansi"
+                title="Kuitansi"
                 //extra={<Button type="dashed" onClick={() => browserHistory.push('/addpegawai')}>Tambah Pegawai </Button>}
                 extra={<Row><Col> <Button type="dashed" onClick={modalExportTrigger}>Export to excel</Button></Col></Row>}
-                style={{ width: '100%', marginBottom: 20  }}
+                style={{ width: '100%', marginBottom: 20 }}
                 headStyle={{ color: 'white', backgroundColor: '#0984e3', fontWeight: 'bold', fontSize: 20 }}
             >
                 <Row>
@@ -799,7 +811,7 @@ function Sppd() {
                                         placeholder="Pilih Format Surat"
                                         optionFilterProp="children"
                                         onChange={onChangeFormatSurat}
-                                        //value={format_surat}
+                                    //value={format_surat}
                                     >
                                         {listFormatSurat.map((data, index) =>
                                             <Option value={data.nama_attr}>{data.nama_attr}</Option>
@@ -825,7 +837,7 @@ function Sppd() {
                                         placeholder="Pilih Format Surat"
                                         optionFilterProp="children"
                                         onChange={onChangeFormatSuratTugas}
-                                        //value={format_surat}
+                                    //value={format_surat}
                                     >
                                         {listFormatSurat.map((data, index) =>
                                             <Option value={data.nama_attr}>{data.nama_attr}</Option>
@@ -1049,19 +1061,19 @@ function Sppd() {
                     </Select>
                 </InputBoxCenter>
             </Modal>
+            
 
-            {/* Modal Print SPPD */}
-
+            {/* Modal Kuitansi */}
             <Modal
-                title="Print SPPD"
+                title="Print Kuitansi SPPD"
                 centered
-                visible={modalPrintSppd}
+                visible={modalPrintKwitansiBendahara}
                 //onOk={createorupdate}
-                onCancel={modalTriggerPrintSppd}
+                onCancel={modalTriggerPrintKwitansiBendahara}
                 footer={null}
                 width={1000}
             >
-                <ComponentToPrint
+                <ComponentToPrintKwitansiBendahara
                     key={id}
                     ref={componentRef}
                     dataToPrint={id}
@@ -1070,11 +1082,11 @@ function Sppd() {
                     trigger={() => <Button block type="primary" icon={<PrinterOutlined />}>Print</Button>}
                     content={() => componentRef.current}
                 />
-
             </Modal>
-
+            
+            {/* Modal Rincian */}
             <Modal
-                title="Print Kwitansi"
+                title="Print Rincian Kuitansi SPPD"
                 centered
                 visible={modalPrintKwitansi}
                 //onOk={createorupdate}
