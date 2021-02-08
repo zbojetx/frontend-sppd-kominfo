@@ -18,6 +18,7 @@ import ReactToPrint from 'react-to-print';
 import styled from 'styled-components';
 import NumberFormat from 'react-number-format'
 import moment from 'moment';
+import renderHTML from 'react-render-html';
 import 'moment/locale/id';
 import { isCompositeComponentWithType } from 'react-dom/test-utils';
 moment.locale('id')
@@ -90,6 +91,7 @@ export class ComponentToPrintKwitansiBendahara extends React.Component {
         console.log(sppdbyid)
     }
 
+
     async getPegawaiAll() {
         const url = 'getpegawai'
         let pegawai = await getall(url)
@@ -131,7 +133,7 @@ export class ComponentToPrintKwitansiBendahara extends React.Component {
                         <tr>
                             <td>Uang Pembayaran</td>
                             <td>:</td>
-                            <td>{moment(listSppd.tanggalkeluar).format('LL')}</td>
+                            <td>Belanja Perjalanan Dinas ASN {listPegawai.nama_pegawai} ke {kabkota.nama} untuk kegiatan {renderHTML(listSppd.maksud || '')}</td>
                         </tr>
 
                     </tbody>
